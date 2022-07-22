@@ -12,8 +12,17 @@ def ranking():
         'language': 'ko-KR'
         }
     response = requests.get(BASE_URL+path, params=params).json().get('results')
-    res = sorted(response.items())
-    print(res)
+    bin = []
+    ans = []
+    for res in response:
+      bin.append((res, res.get('vote_average')))
+    bin.sort(key = lambda x:(-x[1]))
+    for i in range(5):
+      ans.append(bin[i][0])
+    return ans
+
+      
+
 
 
 
