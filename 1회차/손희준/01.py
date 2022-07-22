@@ -1,5 +1,5 @@
 import requests
-# a06345365e5e1f1f0b500156fa91bc7d
+
 
 def popular_count():
     pass 
@@ -7,7 +7,7 @@ def popular_count():
     base_URL = 'https://api.themoviedb.org/3/'
     path = 'movie/popular'
     params = {
-        'api_key' : 'a06345365e5e1f1f0b500156fa91bc7d',
+        'api_key' : '',
         'language' : 'ko-KR'
         }
     response = requests.get(base_URL+path, params=params)

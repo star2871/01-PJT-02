@@ -13,11 +13,11 @@ def vote_average_movies():
         }
     response = requests.get(base_URL+path, params=params)
     movie_dict = response.json()
-    movie_details = movie_dict.get('results', None)
+    movie_details = movie_dict.get('results')
     over_8 = []
 
     for i in movie_details:
-      vote = i.get('vote_average',None)
+      vote = i.get('vote_average')
       if vote >= 8:
         over_8.append(i)
     return over_8   
