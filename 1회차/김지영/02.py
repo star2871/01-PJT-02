@@ -1,11 +1,27 @@
+# 특정 조건에 맞는 인기 영화 조회
+# 평점 8이상 목록만 출력
+
 import requests
 from pprint import pprint
 
 
 def vote_average_movies():
-    pass 
-    # 여기에 코드를 작성합니다.  
-
+  pass 
+  # 여기에 코드를 작성합니다.  
+  BASE_URL = 'https://api.themoviedb.org/3'
+  path = '/movie/popular'
+  params = {
+      'api_key': '66c53dabd7bc9afc53c2ca7eba855583',
+      'language' : 'ko-KR'
+  }
+  response = requests.get(BASE_URL+path, params=params).json()
+  v = response.get('results') # type(v) = list
+  vn = [] # 8점이상인 영화 results를 받을 빈 리스트
+  for i in v:
+    vt = i.get('vote_average') # 각 영화의 평점
+    if vt >= 8:
+      vn.append(i)  # 리스트에 추가, 평점만 받지 말기(vt)..영화 자체(i)가 필요하다구요
+  return vn
 
 # 아래의 코드는 수정하지 않습니다.
 if __name__ == '__main__':
