@@ -13,7 +13,7 @@ def credits(title):
     BASE_URL = 'https://api.themoviedb.org/3'
     path = '/search/movie'
     params = {
-        'api_key': 'API_KEY_TOKEN',
+        'api_key': API_KEY_TOKEN,
         'language': 'ko-KR',
         'query': title
     }
