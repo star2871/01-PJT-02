@@ -1,13 +1,17 @@
 import requests
+import os
+from dotenv import load_dotenv
 from pprint import pprint
 
 
 def recommendation(title):
+    load_dotenv()
+    key = os.getenv('KEY')
     BASE_URL = 'https://api.themoviedb.org/3'
     path = '/search/movie'
 
     params = {
-        'api_key': 'b730b79937fc4c4e8a1d72531451f76b',
+        'api_key': key,
         'language': 'ko-KR',
         'query': title
     }
@@ -23,7 +27,9 @@ def recommendation(title):
             'language': 'ko-KR',
             'movie_id': movie_id
         }
+
         response = requests.get(BASE_URL + path, params=params).json()
+        
         if response['results']:
             for i in response['results']:
                 result.append(i['title'])

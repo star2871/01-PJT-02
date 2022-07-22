@@ -1,13 +1,16 @@
 import requests
-
-# https://api.themoviedb.org/3/movie/550?api_key=b730b79937fc4c4e8a1d72531451f76b
+import os
+from dotenv import load_dotenv
 
 def popular_count():
+    load_dotenv()
+    key = os.getenv('KEY')
+    
     BASE_URL = 'https://api.themoviedb.org/3'
     path = '/movie/popular'
 
     params = {
-        'api_key': 'b730b79937fc4c4e8a1d72531451f76b',
+        'api_key': key,
         'language': 'ko-KR'
     }
 
