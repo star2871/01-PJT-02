@@ -1,6 +1,15 @@
 import requests
 from pprint import pprint
 
+base_URL = 'https://api.themoviedb.org/3'
+path = '/movie/{movie_id}/recommendations'
+
+params = {
+    'api_key' : '652241f716c0f8b8f5006465a644f600',
+    'language': 'en-en'
+}
+
+response = requests.get(base_URL+path, params = params).json()
 
 def recommendation(title):
     pass 
