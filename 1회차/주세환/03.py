@@ -1,4 +1,4 @@
-from ctypes.wintypes import LARGE_INTEGER
+
 import requests
 from pprint import pprint
 
@@ -14,13 +14,13 @@ def ranking():
     }
     response = requests.get(db_URL+path, params = params).json()        # response 변수에 requests(URL에서 가져온 데이터)를 json형식으로 정의 한다
     # pprint(response)
-    
-    ingi = []
-    for i in response.get('results'):
-        SP = i.get('vote_average')
-        if rank(i.get('vote_average'), 5):
-          ingi.append(i)
-    return ingi
+    # 평점이 높은 5위를 출력하라
+    inki = []                                                           # fot문으로 출력한 값을 변수 inki에 리스트를 만들어 업데이트 한다
+    for i in response.get('results'):                                   
+          inki.append(i)
+          osun = sorted(inki, key= lambda i : i.get('vote_average'))    # lambda 를 활용하여 정렬 하여 변수 osun에 넣는다
+          osunup = osun[::-1]                                           # 슬라이싱 하여 순서를 역순으로 바꾼다 
+    return osunup[0:5]                                                  # 슬라이싱으로 0 ~ 4 인덱스까지 리턴한다
 # 아래의 코드는 수정하지 않습니다.
 if __name__ == '__main__':
     """
