@@ -3,8 +3,29 @@ from pprint import pprint
 
 
 def recommendation(title):
-    pass 
-    # 여기에 코드를 작성합니다.  
+    URL = 'https://api.themoviedb.org/3'
+    path = '/search/movie'
+    params = {
+        'api_key': '79d21b47771ad41e6e0ed5b1a8b503e7',
+        'language': 'ko-KR',
+        'query': input()
+    }
+    response = requests.get(URL+path, params=params).json()
+    search = response.get('results')[0].get('id')
+    movie_id = search
+    URL = 'https://api.themoviedb.org/3'
+    path =f'/movie/{movie_id}/recommendations'
+    params = {
+        'api_key': '79d21b47771ad41e6e0ed5b1a8b503e7',
+        'language': 'ko-KR',
+    }
+    response = requests.get(URL+path, params=params).json()
+    recomm = (response.get('results'))
+    list = []
+    for i in recomm:
+        r = i['title']
+        list.append(r)
+    return(list)
 
 
 # 아래의 코드는 수정하지 않습니다.
