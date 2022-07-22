@@ -5,6 +5,17 @@ from pprint import pprint
 def ranking():
     pass 
     # 여기에 코드를 작성합니다.  
+    url = f'https://api.themoviedb.org/3/movie/popular?api_key=a275979c03887da2638b3b3aabee6ccf&language=ko'    
+    respon = requests.get(url)
+    data = respon.json()    
+    avg8 = []
+    
+
+    for i in (data.get('results')):
+      # print(type(i.get('vote_average')))
+        for a in i.get('vote_average'):
+
+    # return  avg8
 
 
 # 아래의 코드는 수정하지 않습니다.
