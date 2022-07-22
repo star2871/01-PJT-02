@@ -14,12 +14,19 @@ def ranking():
   response = requests.get(BASE_URL+path, params=params).json()
   # 일단 vote_average까지 접근하려면 딕셔너리 건너, 리스트 건너, 딕셔너리key접근~~
   v = response.get('results') # type(v) = list
-  vn = []
+  k = 0
+  p = v[len(v)//2].get('vote_average')
   for i in v:
-    vt = i.get('vote_average') # 각 영화의 평점
-    if vt >= 8:
-      vn.append(i)  # 리스트에 추가, 평점만 받지 말기(vt)..영화 자체(i)가 필요하다구요
-  return vn
+    vk = v[k].get('vote_average')
+    while vk < p:
+      k += 1
+    while vk > p:
+      k -= 1
+    if vk <= v[k+1]:
+      v[k]
+    # ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ안풀려요ㅠㅠㅠㅠㅠ
+
+  return 
 
 
 # 아래의 코드는 수정하지 않습니다.
