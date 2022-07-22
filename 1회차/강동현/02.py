@@ -1,6 +1,8 @@
 import requests
 from pprint import pprint
-
+# - 인기 영화 목록 중 평점이 8점 이상인 영화 목록을 출력합니다.
+# - requests 라이브러리를 활용하여 TMDB에서 현재 인기 있는 영화 목록(Get Populations) 데이터를 요청합니다.
+# - 응답 받은 데이터 중 평점(`vote_average`)이 8점 이상인 영화 목록을 리스트로 반환하는 함수를 작성합니다.
 
 def vote_average_movies():
     popular = "popular"

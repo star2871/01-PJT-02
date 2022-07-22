@@ -1,7 +1,8 @@
 # 외부 라이브러리 가져오기
 # 명령어 : pip install requests
 import requests
-
+# - 아래의 문서를 활용하여 BTC(비트코인)의 KRW(원) 전일종가를 출력하시오.
+# - [https://apidocs.bithumb.com/reference/현재가-정보-조회](https://apidocs.bithumb.com/reference/%ED%98%84%EC%9E%AC%EA%B0%80-%EC%A0%95%EB%B3%B4-%EC%A1%B0%ED%9A%8C)
 def get_btc_krw():
     order_currency = "BTC"
     payment_currency = "KRW"

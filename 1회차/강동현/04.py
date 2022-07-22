@@ -1,6 +1,9 @@
 import requests
 from pprint import pprint
-
+# - 영화 제목으로 검색을 하여 추천 영화 목록을 출력합니다.
+# - requests 라이브러리를 활용하여 TMDB에서 영화제목으로 영화를 검색(Search Movies)합니다.
+# - 응답 받은 결과 중 첫번째 영화의 id 값을 활용하여 TMDB에서 추천 영화 목록(Get Recommendations)을 가져옵니다.
+# - 추천 영화 목록을 리스트로 반환하는 함수를 작성합니다.
 
 def recommendation(title):
     
