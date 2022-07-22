@@ -73,6 +73,7 @@ def vote_average_movies():
 
     return movie_list
 
+
 # 아래의 코드는 수정하지 않습니다.
 if __name__ == '__main__':
     """
