@@ -1,8 +1,10 @@
 import requests
 from pprint import pprint
-
+a = 30
+b = 5
 
 def credits(title):
+    print(a // b)
     pass 
     # 여기에 코드를 작성합니다.  
 
