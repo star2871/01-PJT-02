@@ -1,10 +1,18 @@
 import requests
 from pprint import pprint
 
+# https://api.themoviedb.org/3/movie/{movie_id}/recommendations?api_key=<<api_key>>&language=en-US&page=1
+BASE_URL = 'https://api.themoviedb.org/3/'
+path = 'movie/{movie_id}/recommendations'
+params = {
+    'api_key': '7f4bcebe925d6be694eced873e49d10e',
+    'language': 'ko-KR'
+}
+
 
 def recommendation(title):
-    pass 
-    # 여기에 코드를 작성합니다.  
+    pass
+    # 여기에 코드를 작성합니다.
 
 
 # 아래의 코드는 수정하지 않습니다.
