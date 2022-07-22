@@ -1,4 +1,4 @@
-
+import requests
 
 
 def get_btc_krw():
