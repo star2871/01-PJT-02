@@ -1,12 +1,16 @@
 import requests
 from pprint import pprint
-
+from dotenv import load_dotenv
+import os
 
 def vote_average_movies():
+    load_dotenv()
+    key = os.environ.get('TMDB_API_key')
+
     base_url = 'https://api.themoviedb.org/3'
     path = '/movie/popular'
     prameters = {
-        'api_key' : '36e69126e5702e17a95125dc94bbccbe',
+        'api_key' : key,
         'language': 'ko-KR',
         'page':1
     }
