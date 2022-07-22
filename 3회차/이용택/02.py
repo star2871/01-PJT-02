@@ -5,28 +5,24 @@ import os
 
 def vote_average_movies():
     load_dotenv()
-    key = os.getenv("KEY")
+    key = os.getenv('KEY')
     base_url = 'https://api.themoviedb.org/3'
     path = '/movie/popular'
     params = {
-        'api_key' : key,
-        'language' : 'ko' 
+        'api_key': key,
+        'language': 'ko-kr'
     }
+
+    res = requests.get(base_url + path, params = params)
+    popular_movie = res.json()['results']
+
+    result = []
+
+    for movie in popular_movie:
+      if movie['vote_average'] >= 8.0:
+        result.append(movie)
     
-    res = requests.get(base_url + path, params=params)
-    data = res.json()
-
-    target_data = data['results']
-    
-    # 출력할 데이터를 저장할 리스트 객체 초기화
-    ans = []
-
-    # 반복문 및 조건문을 통해 target_data를 순회하며 평점 8.0이상인 영화가 있을 경우 ans 변수에 추가하여 저장
-    for movie in target_data:
-      if movie.get('vote_average') >= 8.0:
-        ans.append(movie)
-
-    return ans
+    return result
 
 # 아래의 코드는 수정하지 않습니다.
 if __name__ == '__main__':

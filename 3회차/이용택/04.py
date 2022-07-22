@@ -6,39 +6,30 @@ import os
 
 def recommendation(title):
     load_dotenv()
-    key = os.getenv("KEY")
+    key = os.getenv('KEY')
+    params = {
+        'api_key' : key,
+        'language' : 'ko',
+        'query' : title
+    }
     base_url = 'https://api.themoviedb.org/3'
     path = '/search/movie'
-    params = {
-            'api_key' : key,
-            'language' : 'ko-kr',
-            'query' : f'{title}'}
-
-    response = requests.get(base_url + path, params = params).json()
     
-    if response['results']:
-        movie_id = response['results'][0]['id']
+    res = requests.get(base_url + path, params = params)
+    
+    if res.json()['results']:
+        movie_id = res.json()['results'][0]['id']
         path = f'/movie/{movie_id}/recommendations'
-        
-        response = requests.get(base_url + path, params = params).json()
-        
-        result = []
-        for reco_movie in response['results']:
-            result.append(reco_movie['title'])
+        res = requests.get(base_url + path, params = params).json()
 
+        if res['results']:
+            result = list(map(lambda x : x['title'], res['results']))
+        else:
+            result = []
     else:
         result = None
-
-    return result     
-
     
-
-
-
-
-
-
-
+    return result
 
 # 아래의 코드는 수정하지 않습니다.
 if __name__ == '__main__':
@@ -51,6 +42,5 @@ if __name__ == '__main__':
     pprint(recommendation('기생충'))  # ok
     # ['조커', '1917', '조조 래빗', ..생략.., '살인의 추억', '펄프 픽션']
     pprint(recommendation('그래비티'))
-    # # # []
+    # []
     pprint(recommendation('검색할 수 없는 영화'))
-    # None

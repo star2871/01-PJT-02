@@ -1,7 +1,23 @@
-# 프로젝트 02 - 파이썬 기반 데이터 활용
+# [개인 PROJECT 02] requests library를 활용한 Python 기반 데이터 활용
 
-## 후기
-- 여태까지 배운 내용의 수준으로 해결이 가능한 프로젝트였음을 알 수 있었다.
-- 다만 API를 통한 작업 수행이 익숙하지 않음, 다양한 json 형식의 정보에 대한 혼동으로 예상치 못한 어려움을 겪었다.
-- 막연하게 느껴졌던 requests library에 대해 공부할 수 있는 시간이었고 배웠던 문법과 자료형에 대해 다시금 확인할 수 있어 좋았다.
- 
+## 목적
+- Python 기본 문법 (조건문, 반복문, 함수) 활용
+- Python external library 활용
+- API 통신 및 json 데이터의 활용
+
+
+## Contents
+- [0. API 문서와 requests 활용](./00.py)
+- [1. 인기 영화 조회](./00.py)
+- [2. 특정 조건에 맞는 인기 영화 조회](./00.py)
+- [3. 특정 조건에 맞는 인기 영화 조회 (2)](./00.py)
+- [4. 영화 조회 및 추천 영화 조회](./00.py)
+- [5. 출연진 및 연출진 데이터 조회](./00.py)
+
+
+## Reference
+- [TMDB](https://www.themoviedb.org/documentation/api?language=ko)
+- [requests library](https://requests.readthedocs.io/en/latest/)
+
+
+

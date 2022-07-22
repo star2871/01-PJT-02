@@ -6,44 +6,32 @@ import os
 
 def credits(title):
     load_dotenv()
-    key = os.getenv("KEY")
-    
+    key = os.getenv('KEY')
+    params = {
+        'api_key' : key,
+        'language' : 'ko',
+        'query' : title
+    }
     base_url = 'https://api.themoviedb.org/3'
     path = '/search/movie'
-    params = {
-            'api_key' : key,
-            'language' : 'ko-kr',
-            'query' : f'{title}'}
-
-    response = requests.get(base_url + path, params = params).json()
-    # title이 serachable
-    if response['results']:
-        movie_id = response['results'][0]['id']
+    
+    res = requests.get(base_url + path, params = params).json()
+    if res['results']:
+        movie_id = res['results'][0]['id']
         path = f'/movie/{movie_id}/credits'
-
-        response = requests.get(base_url + path, params = params).json()
-        cast_info = response['cast']
+        res = requests.get(base_url + path, params = params).json()
         
-        casting = []
-        for cast in cast_info:
-            if cast['cast_id'] < 10:
-                casting.append(cast['original_name'])
-        
-        crew_info = response['crew']
-        directing = []
-        for crew in crew_info:
-            if crew['department'] == 'Directing':
-                directing.append(crew['original_name'])
+        cast = list(map(lambda x : x['name'], filter(lambda x : x['cast_id'] < 10 , res['cast'])))
+        crew = list(map(lambda x : x['name'], filter(lambda x : x['department'] == 'Directing', res['crew'])))
 
-        result = {}  
-        result['cast'] = casting
-        result['crew'] = directing
+        result ={}
+        result['cast'] = cast
+        result['crew'] = crew
 
     else:
         result = None
-    
-    return result
-    
+
+    return result    
 
 # 아래의 코드는 수정하지 않습니다.
 if __name__ == '__main__':
@@ -53,5 +41,5 @@ if __name__ == '__main__':
     """
     pprint(credits('기생충'))
     # {'cast': ['Song Kang-ho', 'Lee Sun-kyun', ..., 'Jang Hye-jin'], 'crew': ['Bong Joon-ho', 'Park Hyun-cheol', ..., 'Yoon Young-woo']}
-    # pprint(credits('검색할 수 없는 영화'))
+    pprint(credits('검색할 수 없는 영화'))
     # None

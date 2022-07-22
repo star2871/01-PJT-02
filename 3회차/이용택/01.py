@@ -7,29 +7,16 @@ import os
 def popular_count():
     load_dotenv()
     key = os.getenv("KEY")
-    # 기본 url
     base_url = 'https://api.themoviedb.org/3'
-    
-    # 기본 url에 이어 붙일 details
     path = '/movie/popular'
-    
-    # url에 함께 보낼 변수 
     params = {
-        'api_key' : key,
-        'language' : 'ko'
+        'api_key': key,
+        'language': 'ko-kr'
     }
-    
-    # requests 객체 생성, 정보 요청 
-    res = requests.get(base_url + path, params=params)
 
-    # 받은 데이터 -> dict, 변수 저장
-    data = res.json()
-
-    # 원하는 정보에 해당하는 값 따로 변수에 저장
-    target_data = data['results']  
-  
-    # 갯수 변수에 저장
-    result = len(target_data)
+    res = requests.get(base_url + path, params = params)
+    popular_movie = res.json()['results']
+    result = len(popular_movie)
 
     return result
 
