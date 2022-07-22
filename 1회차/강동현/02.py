@@ -3,8 +3,15 @@ from pprint import pprint
 
 
 def vote_average_movies():
-    pass 
-    # 여기에 코드를 작성합니다.  
+    popular = "popular"
+    url = f"https://api.themoviedb.org/3/movie/{popular}"
+    params = {
+        'api_key': 'personal key value input',
+        'language': 'ko-KR'
+    }
+    res = requests.get(url, params = params).json() #목록반환
+    result = list(filter(lambda i : i["vote_average"] > 8.0, res['results'])) # 키 result에서 값 8.0이상
+    return result
 
 
 # 아래의 코드는 수정하지 않습니다.

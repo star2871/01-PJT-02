@@ -3,8 +3,16 @@ from pprint import pprint
 
 
 def ranking():
-    pass 
-    # 여기에 코드를 작성합니다.  
+    popular = "popular"
+    url = f"https://api.themoviedb.org/3/movie/{popular}"
+    params = {
+        'api_key': 'personal key value input',
+        'language': 'ko-KR'
+    }
+    res = requests.get(url, params = params).json() #목록반환
+    lst = sorted(res["results"], key=lambda i:i["vote_average"], reverse = True)
+    result = lst[:5]
+    return result
 
 
 # 아래의 코드는 수정하지 않습니다.
