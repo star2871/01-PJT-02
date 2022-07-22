@@ -5,6 +5,7 @@
 # https://api.themoviedb.org/3/movie/550?api_key=ee778b1a58aeccbc4b3b0e358cb43716
 
 import requests
+from pprint import pprint
 
 
 def popular_count():
@@ -18,7 +19,7 @@ def popular_count():
         'language' : 'ko-KR'
     }
     response = requests.get(URL+path, params=params).json()
-    print(response)
+    pprint(response)
 
 # 아래의 코드는 수정하지 않습니다.
 if __name__ == '__main__':
