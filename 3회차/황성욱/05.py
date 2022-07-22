@@ -3,8 +3,6 @@ import requests
 from pprint import pprint
 
 
-
-
 def credits(title):
     base = 'https://api.themoviedb.org/3'
     path = f'/search/movie?query={title}'
@@ -14,27 +12,29 @@ def credits(title):
     }
     
     response = requests.get(base+path, params=params).json()
-    res = response.get('results')
-    movie_id =  list(map(lambda x:x['id'],res))
+    try:
+        res = response['results']
+        movie_id =  res[0]['id']
+    except:
+        return None
     res_dict = {}
     cast_li = []
     crew_li = []
-    for i in movie_id:
-        detail_path = f'/movie/{i}/credits'
-        response2 = requests.get(base+detail_path, params=params).json()
-
-        raw_crew_li = response2.get('crew')
-        raw_cast_li = response2.get('cast')
-        for j in raw_crew_li:
-            if j.get('department') == 'Directing':
-                crew_li.append(j.get('name'))
-        for k in raw_cast_li:
-            if k.get('cast_id') < 10:
-                cast_li.append(k.get('name'))
+    print(res,movie_id)
+    detail_path = f'/movie/{movie_id}/credits'
+    response2 = requests.get(base+detail_path, params=params).json()
+    raw_crew_li = response2.get('crew')
+    raw_cast_li = response2.get('cast')
+    for j in raw_crew_li:
+        if j.get('department') == 'Directing':
+            crew_li.append(j.get('name'))
+    for k in raw_cast_li:
+        if k.get('cast_id') < 10:
+            cast_li.append(k.get('name'))
         res_dict["cast"] = cast_li
         res_dict["crew"] = crew_li
-        return res_dict
-        
+    return res_dict
+    
 
 # 아래의 코드는 수정하지 않습니다.
 if __name__ == '__main__':

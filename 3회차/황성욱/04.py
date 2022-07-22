@@ -16,9 +16,7 @@ def recommendation(title):
         recom_path = f'/movie/{res}/recommendations'
         response2 = requests.get(base+recom_path, params=params).json()
         res2 = response2.get('results')
-        # for i in res2:
-        #     li.append(i.get['title'])
-        is_err = False
+        
         rec = list(map(lambda x:x['title'], res2))
 
         return rec
