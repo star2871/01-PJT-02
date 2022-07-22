@@ -8,8 +8,11 @@ def vote_average_movies():
     # 여기에 코드를 작성합니다.  
     res = (requests.get(url)).json()
     resResult = res['results']
-    return len(resResult)
-    
+    movie_list = []
+    for i in resResult:
+      if i['vote_average']>=8:
+        movie_list.append(i)
+    return movie_list
 
 # 아래의 코드는 수정하지 않습니다.
 if __name__ == '__main__':

@@ -1,11 +1,24 @@
 import requests
 from pprint import pprint
-
+api_key = "17d99d001f6c99dd0c99035720f60646"
 
 def recommendation(title):
     pass 
-    # 여기에 코드를 작성합니다.  
-
+    # 여기에 코드를 작성합니다.
+    try :
+        searched_movie = f"https://api.themoviedb.org/3/search/movie?api_key={api_key}&language=ko-KR&query={title}&page=1"
+        res = requests.get(searched_movie).json()
+        resResult = res['results']
+        movie_id=resResult[0]['id']
+        recommanded_movie = f"https://api.themoviedb.org/3/movie/{movie_id}/recommendations?api_key={api_key}&language=koKR&page=1"
+        rmd = (requests.get(recommanded_movie)).json()
+        rmd_result = rmd['results']
+        title_list = []
+        for i in rmd_result:
+            title_list.append(i['title'])
+        return title_list
+    except:
+        return None
 
 # 아래의 코드는 수정하지 않습니다.
 if __name__ == '__main__':
