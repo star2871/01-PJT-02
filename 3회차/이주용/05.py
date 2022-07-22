@@ -4,7 +4,7 @@ from pprint import pprint
 
 def credits(title):
     params = {
-        'api_key' : 'a926205337e50c1326d01b6b82f037cd',
+        'api_key' : '',
         'language' : 'ko-KR',
         'query' : f'{title}'
     }

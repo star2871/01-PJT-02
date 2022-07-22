@@ -3,7 +3,7 @@ from pprint import pprint
 
 def vote_average_movies():
     params = {
-        'api_key' : 'a926205337e50c1326d01b6b82f037cd',
+        'api_key' : '',
         'language' : 'ko-KR'
     }
     base_url = 'https://api.themoviedb.org/3'
