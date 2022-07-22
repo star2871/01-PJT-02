@@ -2,9 +2,28 @@ import requests
 from pprint import pprint
 
 
+
 def vote_average_movies():
-    pass 
-    # 여기에 코드를 작성합니다.  
+  
+    api_key = "f4dd99962cc7bdf87852d77531969501"
+    base_url = f"https://api.themoviedb.org/3"
+    population_path = "/movie/popular"
+    
+    payload = {"api_key" : api_key,
+            "language" : "ko-KR",
+            "page" : 1}
+    
+    
+    
+    response = requests.get(url = base_url + population_path, params = payload).json()
+        
+    high_Ratings_movie_dict = []
+    
+    for movie_info in response.get("results"):
+        if movie_info["vote_average"] >= 8.0:
+          high_Ratings_movie_dict.append(movie_info)
+          
+    return high_Ratings_movie_dict
 
 
 # 아래의 코드는 수정하지 않습니다.
