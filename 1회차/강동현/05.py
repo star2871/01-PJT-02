@@ -14,28 +14,28 @@ def credits(title):
         'language': 'ko-KR'
     }   
     res = requests.get(url, params = params).json() #목록반환
-    
-    try:
-        resp = res['results']
-        movie_id =  resp[0]['id']
-    except:
-        return None
     dic = {}
     cast_li = []
     crew_li = []
-    print(res,movie_id)
-    url2 = f'https://api.themoviedb.org/3//movie/{movie_id}/credits'
-    res2 = requests.get(url2, params=params).json()
-    crew_li2 = res2.get('crew')
-    cast_li2 = res2.get('cast')
-    for i in crew_li2:
-        if i.get('department') == 'Directing':
-            crew_li.append(i.get('name'))
-    for i in cast_li2:
-        if i.get('cast_id') < 10:
-            cast_li.append(i.get('name'))
-        dic["cast"] = cast_li
-        dic["crew"] = crew_li
+    try:
+        resp = res['results']
+        mv_id =  resp[0]['id']
+        
+        url2 = f'https://api.themoviedb.org/3//movie/{mv_id}/credits'
+        res2 = requests.get(url2, params=params).json()
+        crew_li2 = res2.get('crew')
+        cast_li2 = res2.get('cast')
+        for i in crew_li2:
+            if i.get('department') == 'Directing':
+                crew_li.append(i.get('name'))
+        for i in cast_li2:
+            if i.get('cast_id') < 10:
+                cast_li.append(i.get('name'))
+            dic["cast"] = cast_li
+            dic["crew"] = crew_li
+    except:
+        return None
+    
     return dic
 
 
