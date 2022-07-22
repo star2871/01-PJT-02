@@ -23,17 +23,24 @@ def credits(title):
     path2 = f'/movie/{movie_id}/credits'
     movie_recommend = requests.get(url+path2, params=params).json()
     
-    cast = []
-    for people in movie_recommend.get('cast'):
-        if people.get('cast_id') < 10:
-            cast.append(people.get('name'))
-    crew = []
-    for depart in movie_recommend.get('cast'):
-        if depart.get('department') == 'Directing':
-            crew.append(depart.get('name'))
+    try:
+        ca = []
+        for people in movie_recommend.get('cast'):
+            if people.get('cast_id') < 10:
+                ca.append(people.get('name'))
+        cr = []
+        for depart in movie_recommend.get('crew'):
+            if depart.get('department') == 'Directing':
+                cr.append(depart.get('name'))
+    except:
+        return 
 
-    print(cast)
-    print(crew)
+    result = {} 
+    result['cast'] = ca
+    result['crew'] = cr
+    
+    return result 
+
 
 # 아래의 코드는 수정하지 않습니다.
 if __name__ == '__main__':
@@ -45,3 +52,5 @@ if __name__ == '__main__':
     # {'cast': ['Song Kang-ho', 'Lee Sun-kyun', ..., 'Jang Hye-jin'], 'crew': ['Bong Joon-ho', 'Park Hyun-cheol', ..., 'Yoon Young-woo']}
     pprint(credits('검색할 수 없는 영화'))
     # None
+
+
