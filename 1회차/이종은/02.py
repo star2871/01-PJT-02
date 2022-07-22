@@ -10,13 +10,13 @@ def vote_average_movies():
   'language' : 'ko-KR'
   }
   response = requests.get(base_url+path, params=params).json()
-  list1 = requests.get('vote_average')
-  list2 = list >= 8.0
+
   a = []
-  for i in response.get('results'):
-    if i == list2:
-      a.append(i)
-  return a
+  for i in response.get('results'): #response.get('results')은 리스트임
+    #i가 위 리스트에 있고 순회
+    if i.get("vote_average") >= 8.0: #그 i가 8 이상이면
+      a.append(i) #a에 추가됨
+  return a #a 함수 반환
 
 
     

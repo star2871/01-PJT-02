@@ -13,14 +13,14 @@ def popular_count():
     'api_key' : '54a9fff1e7fa56a1b0a2cc7c70c99ac4', 
     'language' : 'ko-KR'
     }
-    response = requests.get(base_url+path, params=params).json()
+    response = requests.get(base_url+path, params=params).json() #응답 받은 값을 가져온다 
     # cnt = 0
     # # for i in response.get('results'):
     # #     cnt += 1
     # #     if i == "":
     # #         break
-    popular_count = len(response.get('results'))
-    return popular_count
+    popular_count = len(response.get('results')) #결과 값 딕셔너리 키 값의 리스트 내 갯수가 몇개인지 확인
+    return popular_count #인기 리스트 영화 갯수 함수 리턴
     
 
 
