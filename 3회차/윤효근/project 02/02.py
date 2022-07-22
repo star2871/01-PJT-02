@@ -1,9 +1,25 @@
 import requests
 from pprint import pprint
-
+url = "https://api.themoviedb.org/3/movie/popular?api_key=484061e3049ebd762e6e4c9830eacfe4&language=ko-KR&page=1"
+headers = {"Accept": "application/json"}
 
 def vote_average_movies():
-    pass 
+    pass
+    response = requests.get(url, headers=headers)
+    m_list = response.json()
+    movies=m_list['results']
+    result=[]
+    for k in movies:
+        d = {}
+        if k['vote_average'] >= 8:
+            d.update(k)
+        else:
+            continue
+        result.append(d)
+
+
+    return result
+
     # 여기에 코드를 작성합니다.  
 
 
