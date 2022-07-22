@@ -1,4 +1,6 @@
-
+# 인기 영화 목록의 개수 출력
+from pprint import pprint
+from urllib import response
 import requests
 
 URL = 'https://api.themoviedb.org/3'
@@ -8,21 +10,13 @@ params ={
     'language' : 'ko-KR'
 }
 response = requests.get(URL + path, params = params).json()
+# pprint(type(response)) <class 'dict'>
+# pprint(response.get('results'))
 data = response.get('results')
 
-
-def popular_count():
+def count_keys(data):
     count = 0
     for i in enumerate(data):
         count += 1
     return count
-    # 여기에 코드를 작성합니다.  
-
-
-# 아래의 코드는 수정하지 않습니다.
-if __name__ == '__main__':
-    """
-    popular 영화목록의 개수 반환
-    """
-    print(popular_count())
-    # 20
+print(count_keys(data))
