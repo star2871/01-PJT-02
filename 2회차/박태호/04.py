@@ -1,9 +1,23 @@
+from urllib import response
 import requests
 from pprint import pprint
 
 
 def recommendation(title):
-    pass 
+    # search 주소를 입력
+
+    base_url = 'https://api.themoviedb.org/3'
+
+    path = '/search/company'
+    
+    params = {
+        'api_key' : '5b0bce187b00bc7d98febf5046458596',
+        'language' : 'ko-kr'
+           }
+    response = requests.get(base_url+path, params = params).json()
+
+    return response
+    
     # 여기에 코드를 작성합니다.  
 
 
