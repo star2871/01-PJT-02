@@ -2,9 +2,23 @@ import requests
 from pprint import pprint
 
 
-def ranking():
-    pass 
-    # 여기에 코드를 작성합니다.  
+def ranking(): 
+  BASE_URL = 'https://api.themoviedb.org/3'
+  path = '/movie/popular'
+  params = {
+    'api_key' : '801b2f9c7a6d8dce6f3bd7f807c9ffc5',
+    'language' : 'ko-KR'
+  }
+  
+  response = requests.get(BASE_URL+path, params=params).json()
+  movie_list = response.get('results') 
+  # 평점순으로 만들고 range 사용해서 5개까지 반환하면 끝
+  for i in movie_list:
+    sorted_list = sorted(i, key = lambda x : -x)
+    print(sorted_list)
+
+    
+    
 
 
 # 아래의 코드는 수정하지 않습니다.
