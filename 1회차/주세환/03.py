@@ -1,3 +1,4 @@
+from ctypes.wintypes import LARGE_INTEGER
 import requests
 from pprint import pprint
 
@@ -5,8 +6,21 @@ from pprint import pprint
 def ranking():
     pass 
     # 여기에 코드를 작성합니다.  
-
-
+    db_URL = 'https://api.themoviedb.org/3'                             # 기본 URL을 받아 와서 변수로 정의한다
+    path = '/movie/popular'                                             # 사이트 내에서 경로가 되는 세부 URL을 별도 나눠서 변수로 정의한다
+    params = {                                                          # api 키 를 딕셔너리 키, 벨류 값으로 넣어야 활용 할 수 있다
+        'api_key' : '0e6592cf2bc6bdab02c8dbf629efc03a',                                     
+        'language' : 'ko-KR'                                            # 언어를 한글로 바꿔주는 옵션 키 이다.
+    }
+    response = requests.get(db_URL+path, params = params).json()        # response 변수에 requests(URL에서 가져온 데이터)를 json형식으로 정의 한다
+    # pprint(response)
+    
+    ingi = []
+    for i in response.get('results'):
+        SP = i.get('vote_average')
+        if rank(i.get('vote_average'), 5):
+          ingi.append(i)
+    return ingi
 # 아래의 코드는 수정하지 않습니다.
 if __name__ == '__main__':
     """
