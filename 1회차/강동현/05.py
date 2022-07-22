@@ -6,7 +6,7 @@ def credits(title):
     mvsearch = f"search/movie?query={title}"
     url = f"https://api.themoviedb.org/3/movie/{mvsearch}"
     params = {
-        'api_key': 'a8b27bb8d5bbcf5dd47097ebd4da4852',
+        'api_key': 'personal key value input',
         'language': 'ko-KR'
     }   
     res = requests.get(url, params = params).json() #목록반환
