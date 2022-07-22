@@ -8,7 +8,7 @@ def ranking():
     BASE_URL = 'https://api.themoviedb.org/3'
     path = '/movie/popular'
     params = {
-        'api_key': 'ea7605a7a7e59759ce6acfc9527a9e1a',
+        'api_key': '',
         'language': 'ko-KR'
 }
     response = requests.get(BASE_URL+path, params=params).json()

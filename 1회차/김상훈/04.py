@@ -7,7 +7,7 @@ def recommendation(title):
     BASE_URL = 'https://api.themoviedb.org/3'
     path = '/movie/496243/recommendations' # /movie/{movie_id}/recommendations
     params = {
-        'api_key': 'ea7605a7a7e59759ce6acfc9527a9e1a',
+        'api_key': '',
         'language': 'ko-KR'
         
     }
