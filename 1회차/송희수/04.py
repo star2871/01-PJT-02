@@ -5,6 +5,14 @@ from pprint import pprint
 def recommendation(title):
     pass 
     # 여기에 코드를 작성합니다.  
+    Base_URL ='https://api.themoviedb.org/3'
+    path = '/search/movie'
+    params = {
+    'api_key': 'ae8388bc3e6c351e220eb9a018290351',
+    'language': 'ko-KR'
+    }
+    response = requests.get(Base_URL+path, params=params).json()
+    
 
 
 # 아래의 코드는 수정하지 않습니다.
