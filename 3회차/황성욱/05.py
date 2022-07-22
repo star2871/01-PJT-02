@@ -1,13 +1,17 @@
 
 import requests
 from pprint import pprint
+import os
+from dotenv import load_dotenv
 
+load_dotenv(verbose=True)
+key = os.getenv('key')
 
 def credits(title):
     base = 'https://api.themoviedb.org/3'
     path = f'/search/movie?query={title}'
     params = {
-    'api_key': '1fbf55bcf78cb7b7e9b4e5832c889a5c',
+    'api_key': key,
     'language': 'ko-KR'
     }
     
@@ -16,7 +20,8 @@ def credits(title):
         res = response['results']
         movie_id =  res[0]['id']
     except:
-        return "검색값이 없습니다"
+        # return "검색값이 없습니다"
+        return None
     res_dict = {}
     cast_li = []
     crew_li = []
