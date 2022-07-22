@@ -1,10 +1,33 @@
+from queue import Empty
 import requests
 from pprint import pprint
 
 
 def recommendation(title):
-    pass 
-    # 여기에 코드를 작성합니다.  
+
+    base_url = 'https://api.themoviedb.org/3/search/movie'
+    params = {
+        'api_key': 'f25f9449dadd6f959e63b7b058966cea',
+        'language': 'ko-KR',
+        'query' : title
+    }
+    response = requests.get(base_url,params=params).json()
+    re_params = {
+        'api_key': 'f25f9449dadd6f959e63b7b058966cea',
+        'language': 'ko-KR',        
+    }
+    movie = response.get('results',None)[0]
+    if title == movie.get('title'):
+        reco_id = movie.get('id')   
+        recommand_url = f'https://api.themoviedb.org/3/movie/{reco_id}/recommendations'
+        reco_response = requests.get(recommand_url,params=re_params).json()
+        reco_list = reco_response.get('results')
+        reco_list2 = []
+        for j in reco_list:
+            reco_list2.append(j['title'])
+        return reco_list2
+    else:
+        return None
 
 
 # 아래의 코드는 수정하지 않습니다.
