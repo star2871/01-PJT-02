@@ -4,7 +4,9 @@
 
 ###  프로젝트에 대한 주요 코드 및 해설
 
-
+- 00번 비트코인 전일 종가
+  - print(response.get('data').get('closing_price'))를 통해서 종가를 출력
+- 
 
 ### 후기
 
