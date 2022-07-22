@@ -3,6 +3,7 @@
 # - 응답 받은 데이터 중 평점(`vote_average`)이 높은 영화 5개의 정보를 리스트로 반환하는 함수를 작성합니다.
 
 # **TIP.** 정렬시 sorted 함수의 key를 활용합니다.
+# 내림차순으로 key 'vote_average'를 기준 sort하고 for문으로 5개 돌려서 받으면 될듯
 
 
 import requests
@@ -10,8 +11,22 @@ from pprint import pprint
 
 
 def ranking():
-    pass 
-    # 여기에 코드를 작성합니다.  
+  URL = 'https://api.themoviedb.org/3'
+  path = '/movie/popular'
+  params = {
+      'api_key': '66393cafe6777ee92a0cc513816794be',
+      'language': 'ko-KR'
+  }
+
+  response = requests.get(URL+path, params=params).json()
+  x = sorted(response['results'], key = lambda results: results['vote_average'])  # 낮은순서대로 리스트
+  x.reverse()
+  res = []
+
+  for i in range(5) :
+    res.append(x[i])
+
+  return res
 
 
 # 아래의 코드는 수정하지 않습니다.
