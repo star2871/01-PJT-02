@@ -13,10 +13,20 @@ def ranking():
   response = requests.get(BASE_URL+path, params=params).json()
   movie_list = response.get('results') 
   # 평점순으로 만들고 range 사용해서 5개까지 반환하면 끝
-  for i in movie_list:
-    sorted_list = sorted(i, key = lambda x : -x)
-    print(sorted_list)
+  movie = sorted(movie_list, key=lambda x:x['vote_average'], reverse = True)
+  # lambda 이용해서 vote_average 내림차순으로 정렬!
+  
+  return movie[:5]
+  
+  
+  
+  
+  # top5 = []
 
+  # movies = sorted(movie_list, key=lambda x: x['vote_average'], reverse=True)
+  # top5 = movies[:5]
+  # return top5
+  # print(result)
     
     
 
