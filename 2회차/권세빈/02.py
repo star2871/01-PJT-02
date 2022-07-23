@@ -1,12 +1,14 @@
 import requests
 from pprint import pprint
-
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 def vote_average_movies():
     URL = 'https://api.themoviedb.org/3'
     path = '/movie/popular'
     params = {
-        'api_key': '79d21b47771ad41e6e0ed5b1a8b503e7',
+        'api_key': os.environ.get('api_key'),
         'language': 'ko-KR'
     }
     response = requests.get(URL+path, params=params).json()
