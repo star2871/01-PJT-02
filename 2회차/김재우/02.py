@@ -4,22 +4,22 @@ from pprint import pprint
 
 def vote_average_movies():
   
-  BASE_URL = 'https://api.themoviedb.org/3'
-  path = '/movie/popular'
+  BASE_URL = 'https://api.themoviedb.org/3' # api 불러 올 주소! 
+  path = '/movie/popular' # 세부 주소! 
   params = {
-    'api_key' : '801b2f9c7a6d8dce6f3bd7f807c9ffc5',
+    'api_key' : '801b2f9c7a6d8dce6f3bd7f807c9ffc5', # 세부 정보! 
     'language' : 'ko-KR'
   }
   
-  response = requests.get(BASE_URL+path, params=params).json()
-  movie_list = response.get('results')
+  response = requests.get(BASE_URL+path, params=params).json() # requests 받아오기! = 정보 불러오기!
+  movie_list = response.get('results') # movie_list에 requests 받아 온 results 저장!
   
-  result = []
-  for i in movie_list:
-    if i.get('vote_average') >= 8.0:
-      result.append(i)
+  result = [] # result 라는 빈 리스트 만들기!
+  for i in movie_list: # 반복문 사용해서 i에 데이터 저장하기!
+    if i.get('vote_average') >= 8.0: # 만약 if i.get i에서 가져온 vote_averge 가 >= 8점 이상일 때
+      result.append(i) # result에 목록 append(i의 정보를) ! 
 
-  return result
+  return result # result 라는 8.0점 이상의 영화를 저장한 저장소를 반환
     
 
       
