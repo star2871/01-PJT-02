@@ -19,7 +19,7 @@ def popular_count():
     res = requests.get(BASE_URL+path, params).json()
     # res에 받아올 주소와 형식을 입력해준다.
     results = res['results']
-    # results 값을 가져온다
+    # key값이 results인 경우의 value 값들을 가져온다
 
 
     return len(results) 

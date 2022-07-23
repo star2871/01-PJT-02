@@ -16,7 +16,7 @@ def vote_average_movies():
     res = requests.get(BASE_URL+path, params).json()
     results = res['results']
     good_movies =[]
-    # 결과 출력 값이 리스트 이미로 필요한 정보를 모아줄 빈 리스트를 작성한다.
+    # 결과 출력 값이 리스트 이므로 필요한 정보를 모아줄 빈 리스트를 작성한다.
     for i in results:
       # results의 항목들을 차례대로 훑는다.
         if type(i) == dict:
