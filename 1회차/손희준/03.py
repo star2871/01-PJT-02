@@ -14,21 +14,11 @@ def ranking():
     response = requests.get(base_URL+path, params=params)
     movie_dict = response.json()
     movie_details = movie_dict.get('results')
+
     top_5 = []
-    sorted_avg = []
-
-    for i in movie_details:
-        sorted_avg.append(i['vote_average'])
-        sorted_avg.sort(reverse=True)
-    top5 = sorted_avg[:5]
-    d = {}
-    for j in movie_details:
-        for k in top5:
-            if j['vote_average'] == top5[k]:
-                d.append(j)
-
-
-    return top5
+    sorted_avg = sorted(movie_details, key=lambda x: x['vote_average'], reverse=True)
+    top_5 = sorted_avg[:5]
+    return top_5  
     
     
       
