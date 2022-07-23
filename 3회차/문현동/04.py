@@ -1,11 +1,15 @@
+import os
 import requests
 from pprint import pprint
+from dotenv import load_dotenv
+
 
 
 def recommendation(title):
     
-    api_key = "f4dd99962cc7bdf87852d77531969501"
-    base_url = f"https://api.themoviedb.org/3"
+    load_dotenv(verbose = True)
+    api_key = os.getenv('api_key')
+    base_url = os.getenv('base_url')
     movie_path = "/search/movie"
     
     payload =\
@@ -14,29 +18,26 @@ def recommendation(title):
         "language" : "ko-KR",
         "query" : title
     }
-    
     response = requests.get(url = base_url + movie_path, params = payload).json()
-        
-    movie_id_list = []
     
-    for movie_info in response.get("results"):
-        movie_id_list.append(movie_info["id"])
-        
-    response_list = []
+    ### print(response)
     
-    for movie_id in movie_id_list:
-        recommendations_path = f"/movie/{movie_id}/recommendations"
-        response_recommendations = requests.get(url = base_url + recommendations_path + f"?api_key={api_key}&language=ko-KR&page=1").json()
-        response_list.append(response_recommendations.get("results"))
-
-    movie_title = []
-
-    for movies in response_list:
-        for movie_info in movies:
-            movie_title.append(movie_info.get("title"))
-
-    return (movie_title if movie_title != [] else None)
-
+    if response.get("results"): # 만약 어떤 코드가 response.get("results") 라면, 아래 코드를 실행하고 /// 즉 response.get("results") 가 있다면 (?)
+        
+        movie_id = response.get("results")[0].get("id")
+        reco_list = [] # 추천 영화들 제목이 들어가는 리스트
+        
+        get_recommendations_path = f"/movie/{movie_id}/recommendations" # 변경된 path 를 통해 추천 영화목록을 가져옵니다.
+        response_recommendations = requests.get(url = base_url + get_recommendations_path + f"?api_key={api_key}&language=ko-KR").json()
+        
+        for reco_movies in response_recommendations.get("results"):
+            reco_list.append(reco_movies.get("title"))
+        
+        return reco_list
+        
+    else:
+        return None
+    
 # 아래의 코드는 수정하지 않습니다.
 if __name__ == '__main__':
     """

@@ -1,5 +1,6 @@
 from attr import asdict
 import requests
+from dotenv import load_dotenv
 
 order_currency = "BTC"
 payment_currency = "KRW"

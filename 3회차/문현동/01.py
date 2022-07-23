@@ -1,11 +1,12 @@
+import os
 import requests
-
-######################################################################################
+from dotenv import load_dotenv
 
 def popular_count():
     
-    api_key = "f4dd99962cc7bdf87852d77531969501"
-    base_url = f"https://api.themoviedb.org/3"
+    load_dotenv(verbose = True)
+    api_key = os.getenv('api_key')
+    base_url = os.getenv('base_url')
     population_path = "/movie/popular"
     
     payload = {"api_key" : api_key,
