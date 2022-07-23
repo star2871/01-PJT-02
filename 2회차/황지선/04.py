@@ -43,7 +43,7 @@ def recommendation(title): # 영화를 검색하는 함수를 포함한 영화 �
     list0 = []
 
     for i in range(len(res)) :
-        list0.append(res[i]['original_title'])
+        list0.append(res[i]['title'])
 
     return list0
 
