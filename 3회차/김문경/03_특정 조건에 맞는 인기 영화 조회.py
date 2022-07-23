@@ -1,10 +1,23 @@
+
+#* 인기 영화 목록을 평점이 높은 순으로 5개의 정렬하여 영화 데이터 목록을 출력합니다.
+#* requests 라이브러리를 활용하여 TMDB에서 현재 인기 있는 영화 목록(Get Populations) 데이터를 요청합니다.
+#* 응답 받은 데이터 중 평점(`vote_average`)이 높은 영화 5개의 정보를 리스트로 반환하는 함수를 작성합니다.
 import requests
 from pprint import pprint
-
+BASE_URL = 'https://api.themoviedb.org/3'
+path = '/movie/now_playing?api_key=617e47b888d4519a585f9f4cd8bbab6e&language=ko-KOR&page=1'
+URL = BASE_URL + path
 
 def ranking():
-    pass 
-    # 여기에 코드를 작성합니다.  
+    response = requests.get(URL).json()
+    results = response['results']
+    # results는 리스트고, 그 안에 각 영화정보들이 딕셔너리로 존재
+    # 그러니 results를 vote_average 기준으로 정렬하면 된다
+    sorted_results = sorted(results, key= lambda x: -x['vote_average'])
+    # lambda 함수를 써서 정렬, -를 붙이면 거꾸로(내림차순) 설정
+    # return sorted_results 까지만 하면 전체를 다 반환하지만
+    #* 우리는 상위 5개만 얻고 싶으므로 리스트 슬라이싱!
+    return sorted_results[:5]
 
 
 # 아래의 코드는 수정하지 않습니다.
