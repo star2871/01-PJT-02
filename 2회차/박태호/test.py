@@ -1,45 +1,47 @@
-from urllib import response
 import requests
 from pprint import pprint
 
 
-def recommendation(title):
-     
-    # 여기에 코드를 작성합니다.  
-    base_url = 'https://api.themoviedb.org/3/'
-    path = f'search/movie?'
+def credits(title):
+    #주소 설정먼저~~
+    base_url = 'https://api.themoviedb.org/3'
+    path = '/search/movie'
     params = {
-        'api_key' : '09d0041de8747ddc735a2981381ae949',
-        'language' : 'ko',
-        'query' : title
+        'api_key' : '5b0bce187b00bc7d98febf5046458596',
+        'query' : title,
+        'language' : 'ko-kr'
     }
-    res = requests.get(base_url+path, params=params).json()
-    data = res
+    # try:
+    res = requests.get(base_url+path,params = params).json()
+    res_id = res.get('results')[0].get('id')#첫번째 영화의 정보들에 접근하여 id 값 가져옴
+    parasite_id = ''
+
+    path2 = f'/movie/{res_id}/credits'
+    res_credits = requests.get(base_url+path2, params = params).json()
     
-    # 새 id를 가지고 data를 다시 가져오기 시작
-    try:
-        idResult = data['results'][0]['id']
-        path = f'movie/{idResult}/recommendations'
-        res = requests.get(base_url+path, params=params)
-        data = res.json()
-        dataList = []
-        for i in data['results']:
-            dataList.append(i['title'])
-        return dataList
-    except IndexError:
-        return 
+    result = {'cast':[],'crew':[]}
+    for i in range(len(res_credits.get('cast'))):
+        if int(res_credits.get('cast')[i].get('cast_id')) < 10:
+            result.get('cast').append(res_credits.get('cast')[i].get('name'))
+        
+        if res_credits.get('crew')[i].get('department') == "Directing":
+            result.get('crew').append(res_credits.get('crew')[i].get('name'))
+
+    return len(res_credits.get('crew'))
+     
+    # except IndexError:
+    #     return None
+
+    # 여기에 코드를 작성합니다.  
+
 
 # 아래의 코드는 수정하지 않습니다.
 if __name__ == '__main__':
     """
-    제목에 해당하는 영화가 있으면 해당 영화의 id를 기반으로 추천 영화 목록 구성
-    추천 영화가 없을 경우 []를 반환
+    제목에 해당하는 영화가 있으면 해당 영화 id를 통해 영화 상세정보를 검색하여 주연배우 목록(cast)과 스태프(crew) 중 연출진 목록을 반환
     영화 id 검색에 실패할 경우 None을 반환
-    (주의) 추천 영화의 경우 아래 예시 출력과 차이가 있을 수 있음
     """
-    pprint(recommendation('기생충'))
-    # ['조커', '1917', '조조 래빗', ..생략.., '살인의 추억', '펄프 픽션']
-    pprint(recommendation('그래비티'))
-    # []
-    pprint(recommendation('검색할 수 없는 영화'))
+    pprint(credits('기생충'))
+    # {'cast': ['Song Kang-ho', 'Lee Sun-kyun', ..., 'Jang Hye-jin'], 'crew': ['Bong Joon-ho', 'Park Hyun-cheol', ..., 'Yoon Young-woo']}
+    pprint(credits('검색할 수 없는 영화'))
     # None
