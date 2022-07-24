@@ -1,8 +1,6 @@
+
+import requests 
 from pprint import pprint
-from urllib import response
-
-
-import requests
 
 def recommendation(title):
     URL = 'https://api.themoviedb.org/3'
@@ -13,30 +11,23 @@ def recommendation(title):
         'query' : 'title'
     }
     response = requests.post(URL + path, params=params).json()
-    movies = response.get('results')
+    result = []
 
-    if response == None:
-        return None
-    else:
-        movie_id = movies[0]['id']
+    if response['results']:
+        movie_id = response['results'][0]['id']
+        path = '/movie/{movie_id}/recommendations'
+        params = {
+            'api_key' : 'd84fbf5eb517d499e6c3ce37311d4394',
+            'language' : 'ko-KR',
+        }
+        response = requests.post(URL + path, params).json()
 
-
-    URL = 'https://api.themoviedb.org/3'
-    path = '/search/movie'
-    params ={
-        'api_key' : 'd84fbf5eb517d499e6c3ce37311d4394',
-        'language' : 'ko-KR',
-        'query' : 'title'
-    }
-    response = requests.post(URL + path, params=params).json()
-    movies = response.get('results')
-    search = []
-
-    for movie in movies:
-        title = movie.get('title')
-        search.append(title)
-    return search
-
+        if response['results']:
+            for i in response['results']:
+                result.append(i['title'])
+                return result
+            else:
+                return None
 
 if __name__ == '__main__':
     pprint(recommendation('기생충'))
