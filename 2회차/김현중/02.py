@@ -7,6 +7,7 @@ def vote_average_movies():
     url = f'https://api.themoviedb.org/3/movie/popular?api_key={api_key}&language=en-US&page=1'
     response = requests.get(url)
     result = []
+    pprint(response.json())
     for i in range(len(response.json()['results'])):
       if response.json()['results'][i]['vote_average'] >= 8 :
         result.append(response.json()['results'][i])
