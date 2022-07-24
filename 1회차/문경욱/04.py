@@ -1,12 +1,20 @@
 import requests
 from pprint import pprint
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.getenv('api_key')
+
+
+
 
 def search(title): # search라는 함수를 정의
     url = 'https://api.themoviedb.org/3' 
     path = '/search/movie'
 
     params = {
-        'api_key': 'e5d3a52ec6678bdeec4350297f8456fb',
+        'api_key' : api_key,
         'language': 'ko-KR',
         'query': f'{title}' # 검색할 영화 제목을 query로 받음
     }
@@ -25,7 +33,7 @@ def recommendation(title):
     path = f'/movie/{movie_id}/recommendations'
 
     params = {
-        'api_key': 'e5d3a52ec6678bdeec4350297f8456fb',
+        'api_key' : api_key,
         'language': 'ko-KR'
     }
 
