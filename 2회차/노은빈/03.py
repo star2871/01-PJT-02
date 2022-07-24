@@ -12,12 +12,15 @@ def ranking():
     }
 
     response = requests.get(base_url + path, params=params).json()
-    
-    lst = []
-    for i in response.get('results'):
-      if i ['vote_average'] :
-        lst.append(i)
-    return sorted(i, reverse = True)
+    sort_response = sorted(response['results'], key = lambda item : item['vote_average'])
+    #sorted(a,key=lambde x:x[0] = 오름차순 정렬)
+
+    lst = []   #결과값을 넣기 위해 새 리스트 만들기
+    for i in sort_response: 
+      lst. append(i)   #lst에 i 추가- 모든 정보 불러오기 위해서
+      if len(lst) == 5 :  #5개를 세면
+        break   # while문 멈춤
+    return lst   #lst 결과 반환
 
 # 아래의 코드는 수정하지 않습니다.
 if __name__ == '__main__':
