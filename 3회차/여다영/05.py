@@ -10,6 +10,8 @@
 #https://api.themoviedb.org/3/movie/550?api_key=f4d88a36cfb682b86111c15f97a34324
 #GET/search/movie
 #required : api_key, query
+#GET/movie/{movie_id}/credits
+#required : api_key
 
 import requests
 from pprint import pprint
@@ -28,7 +30,25 @@ def credits(title):
     results = response.get('results')
 
     if results:
-        return results
+        movie_id = results[0].get('id')
+        
+        path_2 = f'/movie/{movie_id}/credits'
+        params_2 = {
+            'api_key': 'f4d88a36cfb682b86111c15f97a34324'
+        }
+
+        cast = []
+        crew = []
+        credits = requests.get(BASE_URL + path_2, params = params_2).json()
+        for i in credits:
+            if i['department']:
+                if i['department'] == 'Directing':
+                    crew.append(i['name'])
+            else:
+                if i['cast_id'] < 10:
+                    cast.append(i['name'])
+        return cast, crew
+        
     else:
         return None
 
