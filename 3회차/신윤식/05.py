@@ -1,6 +1,11 @@
+from re import S
 import requests
+import os
 from pprint import pprint
+from dotenv import load_dotenv
 
+load_dotenv()
+s = os.environ.get('api_key')
 
 def credits(title):
     try:
@@ -9,7 +14,7 @@ def credits(title):
         path_1 = '/search/movie'
         url_1 = Base_url+path_1
         params_1 = {
-            'api_key':'c50a19b48082034474f496795a05cb2c',
+            'api_key':s,
             'language':'ko-KR',
             'query':title
         }
@@ -17,7 +22,7 @@ def credits(title):
 
         url_2 = f'https://api.themoviedb.org/3/movie/{movie_id}/credits'
         params_2 = {
-            'api_key':'c50a19b48082034474f496795a05cb2c',
+            'api_key':s,
             'language':'ko-KR',
         }
 

@@ -1,13 +1,17 @@
 import requests
+import os 
+from dotenv import load_dotenv
 from pprint import pprint
 
+load_dotenv()
+secret_key = os.environ.get('api_key')
 
 def popular_count():
 
     Base_url = 'https://api.themoviedb.org/3'
     path = '/movie/popular'
     params = {
-        'api_key':'c50a19b48082034474f496795a05cb2c',
+        'api_key':secret_key,
         'language':'ko-KR'
     }
     response = requests.get(Base_url+path, params = params).json().get('results')

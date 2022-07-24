@@ -1,6 +1,10 @@
 import requests
+import os
 from pprint import pprint
+from dotenv import load_dotenv
 
+load_dotenv()
+s = os.environ.get('api_key')
 
 def recommendation(title):
     try:
@@ -9,7 +13,7 @@ def recommendation(title):
         path_1 = '/search/movie'
         url_1 = Base_url+path_1
         params_1 = {
-            'api_key':'c50a19b48082034474f496795a05cb2c',
+            'api_key':s,
             'language':'ko-KR',
             'query':title
         }
@@ -18,7 +22,7 @@ def recommendation(title):
         # 영화 추천목록 가져오기
         url_2 = f'https://api.themoviedb.org/3/movie/{movie_id}/recommendations'
         params_2 = {
-            'api_key':'c50a19b48082034474f496795a05cb2c',
+            'api_key':s,
             'language':'ko-KR',
         }
         response = requests.get(url_2, params = params_2).json().get('results')
