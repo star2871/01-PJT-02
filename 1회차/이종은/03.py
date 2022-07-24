@@ -19,8 +19,9 @@ def ranking():
   #둘 다 key, reverse를 매개변수로 가질 수 있고 key값으로 정렬되며 lamda를 가질 수 있음
   #lamda는 특정 기준을 잡아줌
 
-  list2 = [] #
+  list2 = [] 
   for i in range(5): #5개 추출
+    #list1이 리스트이기 때문
     list2.append(list1[i]) #리스트1에서 추출한 i를 list2에 넣어둠
   return list2
 
