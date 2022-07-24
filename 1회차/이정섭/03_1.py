@@ -13,7 +13,8 @@ def ranking():
 
     response = requests.get(Base_URL+path, params=params).json()
     top5 =  (list(filter(lambda x: x["popularity"], response["results"][:5])))
-
+    # At first, I did not check which application is acceptable response in `movie/popular/` path and just named `rating` which is not
+    # the rseponse that included in /popular path in json
     return top5
 
 # 아래의 코드는 수정하지 않습니다.
