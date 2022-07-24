@@ -16,7 +16,7 @@ def popular_count():
         'api_key': key,
         'language': 'ko-KR'
     }
-    response = requests.get(BASE_URL+path, params=params).json()
+    response = requests.get(BASE_URL+path, params = params).json()
 
     return len(response['results'])
 

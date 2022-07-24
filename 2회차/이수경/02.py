@@ -17,10 +17,10 @@ def vote_average_movies():
         'api_key': key,
         'language': 'ko-KR'
     }
-    response = requests.get(BASE_URL+path, params=params).json()
+    response = requests.get(BASE_URL+path, params = params).json()
     result = list(filter(lambda x: x['vote_average'] > 8.0, response['results']))
 
-    return result
+    return result               # 평점 8점 이상인 영화 정보를 리스트로 반환
 
 # 아래의 코드는 수정하지 않습니다.
 if __name__ == '__main__':
