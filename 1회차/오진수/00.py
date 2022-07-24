@@ -12,3 +12,4 @@ print(response)
 
 data = response.json()
 print(data.get('data').get('prev_closing_price'))
+      #data.get('data)자체가 딕셔너리
