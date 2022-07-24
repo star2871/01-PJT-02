@@ -6,7 +6,7 @@ def popular_count():
     url = 'https://api.themoviedb.org/3'
     PATH = '/movie/popular'
     movie_info = {
-    'api_key' : 'bd811fbe5b564377261911e60b32d7ec',
+    'api_key' : '',
     'language' : 'ko-KR'
     }
 
