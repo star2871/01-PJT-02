@@ -18,7 +18,6 @@ def ranking():
     for i in result:
       ranking.append(i)
       rank = sorted(ranking, key = lambda r: r['vote_average'], reverse = True)
-      # r: r['vote_average] r은 input과 output
     return rank[0:5]
 
 # 아래의 코드는 수정하지 않습니다.
