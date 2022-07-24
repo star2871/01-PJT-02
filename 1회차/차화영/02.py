@@ -1,14 +1,15 @@
 import requests
 from pprint import pprint
-
+from dotenv import load_dotenv
+import os
 
 def vote_average_movies():
-    pass 
-    # 여기에 코드를 작성합니다.  
+    load_dotenv()
+    key = os.getenv('80c8b18bf43a69499e913dc21300b23c')
     BASE_URL = 'https://api.themoviedb.org/3'
     path = '/movie/popular'
     params = {
-    'api_key': '80c8b18bf43a69499e913dc21300b23c',
+    'api_key': key,
     'language': 'ko-KR'
     }
     response = requests.get(BASE_URL+path, params=params).json()
