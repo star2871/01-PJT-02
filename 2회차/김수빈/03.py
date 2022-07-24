@@ -11,9 +11,9 @@ params = {
 def ranking():
     response = requests.get(BASE_URL+path, params=params).json()
     movies = response.get('results')
-    sorted(movies.get('vote_average'))
+    top_5 = sorted(movies, key= lambda movies: movies['vote_average'], reverse=True)
     
-    return movies
+    return top_5[:5]
 
 # 아래의 코드는 수정하지 않습니다.
 if __name__ == '__main__':
