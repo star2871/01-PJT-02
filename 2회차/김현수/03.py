@@ -1,6 +1,7 @@
 import requests
 from pprint import pprint
 
+# **TIP.** 정렬시 sorted 함수의 key를 활용합니다.
 
 def ranking():
     base_url = 'https://api.themoviedb.org/3'
