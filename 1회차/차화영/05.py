@@ -8,7 +8,7 @@ def credits(title):
     key = os.getenv('80c8b18bf43a69499e913dc21300b23c') 
     BASE_URL = 'https://api.themoviedb.org/3'
     path = '/search/movie'
-    params = {'api_key': key,
+    params = {'api_key': '80c8b18bf43a69499e913dc21300b23c',
     'language': 'ko-KR',
     'query': title
     }
