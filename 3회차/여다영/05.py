@@ -6,13 +6,31 @@
 #- 출연진 중 `cast_id` 값이 `10 미만`인 출연진만 추출하고, 연출진은 부서(`department`)가 `Directing` 인 데이터만 추출합니다.
 #- `cast` 와 `directing` 으로 구성된 딕셔너리에 추출된 값을 리스트로 출력하는 함수를 작성합니다.
 
+#api_key : f4d88a36cfb682b86111c15f97a34324
+#https://api.themoviedb.org/3/movie/550?api_key=f4d88a36cfb682b86111c15f97a34324
+#GET/search/movie
+#required : api_key, query
+
 import requests
 from pprint import pprint
 
 
 def credits(title):
     pass 
-    # 여기에 코드를 작성합니다.  
+    BASE_URL = 'https://api.themoviedb.org/3'
+    path = '/search/movie'
+    params = {
+        'api_key': 'f4d88a36cfb682b86111c15f97a34324',
+        'query': title
+    }
+
+    response = requests.get(BASE_URL + path, params = params).json()
+    results = response.get('results')
+
+    if results:
+        return results
+    else:
+        return None
 
 
 # 아래의 코드는 수정하지 않습니다.
