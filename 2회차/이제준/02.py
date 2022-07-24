@@ -15,6 +15,7 @@ def vote_average_movies():
     pass 
     l = []
     result = response.get('results')
+    print(result)
     for i in result:
       if i['vote_average'] >= 8:
         l.append(i)

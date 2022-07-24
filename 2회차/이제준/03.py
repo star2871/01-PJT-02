@@ -17,8 +17,8 @@ def ranking():
     result = response.get('results')
     for i in result:
       ranking.append(i)
-      rank = sorted(ranking, key = lambda r: r['vote_average'], reverse = True)
-    return rank[0:5]
+      rank = sorted(ranking, key = lambda r: -r['vote_average'])
+    return rank[:5]
 
 # 아래의 코드는 수정하지 않습니다.
 if __name__ == '__main__':
