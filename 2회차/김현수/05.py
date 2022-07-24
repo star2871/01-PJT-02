@@ -23,18 +23,18 @@ def credits(movie_name):
             'movie_id': movie_id #영화id로 찾을꺼야
         }
         res = requests.get(base_url + path, params).json()
-
+        pprint(res)
         #  딕셔너리 값을 cast와 crew라는 리스트를 만들어 출력.
         cast = []    
         for i in res["cast"]:
             if i['cast_id'] < 10:
                 cast.append(i['name'])
-                # res2를 통해 cast_id 값이 10 미만인 인물들의 이름을 cast 폴더에 저장해준다.
+                # res를 통해 cast_id 값이 10 미만인 인물들의 이름을 cast리스트에 저장
         crew = []    
         for j in res["crew"]:
             if j['department'] == 'Directing' :
                 crew.append(j['name'])
-                # res2를 통해 department 값이 "Directing"인 인물들의 이름을 crew 폴더에 저장해준다.
+                # res를 통해 department 값이 "Directing"인 인물들의 이름을 crew리스트에 저장
 
         person = {}
         person["cast"] = cast
