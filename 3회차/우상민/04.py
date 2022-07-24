@@ -20,6 +20,8 @@ def recommendation(title):
     else:
         return None
 
+
+
     BASE_URL ='https://api.themoviedb.org/3'
     paths = f'/movie/{movie_id}/recommendations'
     paramss = {
@@ -30,8 +32,7 @@ def recommendation(title):
     responses = requests.get(BASE_URL+paths, paramss).json()
     for i in responses['results']:
         results.append(i['title'])
-        return results
-
+    return results
 
 
 # 아래의 코드는 수정하지 않습니다.
@@ -44,7 +45,3 @@ if __name__ == '__main__':
     """
     pprint(recommendation('기생충'))
     # ['조커', '1917', '조조 래빗', ..생략.., '살인의 추억', '펄프 픽션']
-    pprint(recommendation('그래비티'))
-    # []
-    pprint(recommendation('검색할 수 없는 영화'))
-    # None
