@@ -20,6 +20,8 @@ def vote_average_movies():
         l.append(i)
     
     return(l)
+
+pprint(vote_average_movies())
         
 
 
