@@ -29,6 +29,7 @@ final_result = []
 for iii in response2:                               # new_result에 있는 상위 평점 5개의 점수와 같은 영화를 검색
   if iii['vote_average'] in new_result:
     final_result.append(iii)
+
 pprint(final_result) 
 
 
