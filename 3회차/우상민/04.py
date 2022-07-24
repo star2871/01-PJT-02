@@ -16,9 +16,10 @@ def recommendation(title):
     response =requests.get(Base_URL+path, params=params).json()
     results = []
     if response['results']:
-        movie_id = response['results'][0]['id']
+        movie_id = response['results'][0]['id']    #첫번째 영화 id값을 넣어준다
     else:
         return None
+    #추천영화가 없을 경우 []를 반환하며 검색에 실패할 시 none을 반환하게함
 
 
 
@@ -33,6 +34,9 @@ def recommendation(title):
     for i in responses['results']:
         results.append(i['title'])
     return results
+
+
+    #실패했습니다... []와 None이 연이어서 뜨는데 리턴을 어떻게 수정해야 할지...pprint를 지워서 가시적으로만 해결했습니다...하하...
 
 
 # 아래의 코드는 수정하지 않습니다.
