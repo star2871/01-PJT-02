@@ -7,14 +7,30 @@ def credits(title):
 
     params = {
         "api_key": '8854669b886a6c07c12ea947bcc2311d',
-        'language': 'ko-KR',
-        'query' : title
+        'language': 'ko-KR'
     }
 
+    result_dict = {'cast':[], 'crew':[]}
+
     BaseURL = "https://api.themoviedb.org/3"
-    path = "/search/movie"
+    path = "/movie/496243/credits"
     response = requests.get(BaseURL + path, params = params).json()
-    
+
+    if 'success' in response.keys():
+        return None
+
+    for actor in response['cast']:
+
+        if actor['cast_id'] < 10:
+            result_dict['cast'].append(actor['name'])
+
+    for crew in response['crew']:
+
+        if crew['department'] == 'Directing':
+            result_dict['crew'].append(crew['name'])
+
+    return result_dict
+
 # 아래의 코드는 수정하지 않습니다.
 if __name__ == '__main__':
     """
