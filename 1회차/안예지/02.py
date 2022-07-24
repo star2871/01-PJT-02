@@ -1,23 +1,28 @@
+import os
+from dotenv import load_dotenv
 import requests
 from pprint import pprint
 
+load_dotenv()
+
+# 인기 영화 목록 중 평점이 8점 이상인 영화 목록을 출력
+# 현재 인기 있는 영화 목록(Get Populations) 데이터를 요청
+# 평점(vote_average)이 8점 이상인 영화 목록을 리스트로 반환
 
 def vote_average_movies():
     
     BASE_URL = 'https://api.themoviedb.org/3'
     path = '/movie/popular'
     params = {
-        'api_key': 'e0c0d3622b43ae47c6135b0a8f2cb8f2',
+        'api_key': os.getenv('TMDB'),
         'language' : 'ko-KR'        
     }
     
     response = requests.get(BASE_URL+path, params=params).json()
-    # print(response)
     result_list = response['results']
-    # print(result_list)
     choice_movie = []
     for dict in result_list:
-          # 리스트 result를 순회하면서
+         
           if int(dict['vote_average']) >= 8:
                 choice_movie += [dict]
     return choice_movie
