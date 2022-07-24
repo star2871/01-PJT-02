@@ -4,8 +4,22 @@ from pprint import pprint
 
 def ranking():
     pass 
-    # 여기에 코드를 작성합니다.  
-
+    # 여기에 코드를 작성합니다.
+    BASE_URL = 'https://api.themoviedb.org/3'
+    path = '/movie/popular'
+    params = {
+    'api_key': '80c8b18bf43a69499e913dc21300b23c',
+    'language': 'ko-KR'
+    }
+    response = requests.get(BASE_URL+path, params=params).json()
+    results = response.get('results')
+    movies = sorted(results, key=lambda results : results['vote_average'],  reverse=True)
+    # list.sort()와 sorted()는 모두 비교하기 전에 각 리스트 요소에 대해 호출할 함수(또는 다른 콜러블)를 지정하는 key 매개 변수를 가지고 있다.
+    # key 매개 변수의 값은 단일 인자를 취하고 정렬 목적으로 사용할 키를 반환하는 함수 -- 객체의 인덱스 중 일부를 키로 사용하여 복잡한 객체를 정렬하는 것
+    # sorted()는 불리언 값(True, False)을 갖는 reverse 매개 변수를 받아들인다. --- sorted의 기본값이 오름차순이므로 reverse = True로 내림차순 정렬한다.
+    movie_5 = movies[0:5]
+    # 평점 상위 5개만 출력 위해 리스트 슬라이싱
+    return movie_5
 
 # 아래의 코드는 수정하지 않습니다.
 if __name__ == '__main__':
