@@ -1,4 +1,5 @@
 from queue import Empty
+import re
 import requests
 from pprint import pprint
 
@@ -16,21 +17,26 @@ def recommendation(title):
         'api_key': 'f25f9449dadd6f959e63b7b058966cea',
         'language': 'ko-KR',        
     }
-    reco_list2 = []
-    
-    movie = response.get('results')
-    if not movie[0]:
+    if response['results'] == []:
         return None
     else:
-        if title == movie[0]['title']:
-            reco_id = movie[0]['id']
-            recommand_url = f'https://api.themoviedb.org/3/movie/{reco_id}/recommendations'
-            reco_response = requests.get(recommand_url,params=re_params).json()
-            reco_list = reco_response['results']
-            for j in reco_list:
-                reco_list2.append(j['title'])
-            return reco_list2
-
+        reco_movie = []
+        movies = response['results']
+        if title == movies[0]['title']:
+            reco_movie = movies[0]['id']
+        else:
+            return reco_movie
+        
+        if reco_movie == None:
+            return reco_movie
+        else:
+            re_url = f'https://api.themoviedb.org/3/movie/{reco_movie}/recommendations'
+            reco_response = requests.get(re_url, params=re_params).json()
+            re_movies = reco_response['results']
+            re_movie = []
+            for movie in re_movies:
+                re_movie.append(movie['title'])
+            return re_movie
 
 # 아래의 코드는 수정하지 않습니다.
 if __name__ == '__main__':
