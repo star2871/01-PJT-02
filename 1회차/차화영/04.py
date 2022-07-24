@@ -32,7 +32,7 @@ def recommendation(title):
         result = None
 
     return result
-# 아래의 코드는 수정하지 않습니다.
+# 아래의 코드는 수정하지 않습니다..
 if __name__ == '__main__':
     """
     제목에 해당하는 영화가 있으면 해당 영화의 id를 기반으로 추천 영화 목록 구성

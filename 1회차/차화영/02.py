@@ -22,6 +22,7 @@ def vote_average_movies():
         # data = data.append(i)
         # AttributeError: 'NoneType' object has no attribute 'append' -- append 메서드는 return값으로 None을 돌려준다.
     return data
+    
 # 아래의 코드는 수정하지 않습니다.
 if __name__ == '__main__':
     """
