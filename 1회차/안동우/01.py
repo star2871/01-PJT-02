@@ -15,15 +15,11 @@ def popular_count():
         'language': 'ko-KR'
     }
 
-    a = requests.get(base_URL+path, params=params).json()
+    a = requests.get(base_URL+path, params=params).json().get('results')
    
-
-    print(a.values())
     
-
+    return(len(a))
     
-
-
 # 아래의 코드는 수정하지 않습니다.
 if __name__ == '__main__':
     """
