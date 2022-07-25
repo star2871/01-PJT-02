@@ -24,7 +24,7 @@ def vote_average_movies():
     # 여기에 코드를 작성합니다.  
     res = requests.get(Base_Url+path, params=params).json()
     data = res['results']
-    print(data[0].get('vote_average'))
+    
     voav8 = []
     list_num = len(data)
 
