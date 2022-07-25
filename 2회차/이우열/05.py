@@ -22,21 +22,20 @@ def credits(title):
 
     path_2 = f'movie/{movie_id}/credits'        # 영화 크레딧를 가져오기 위한 경로
     response2 = requests.get(
-        BASE_URL + path_2, params=params).json().get('results')         # 추천 영화들 정보 가져오기
-    print(response2)
+        BASE_URL + path_2, params=params).json()         # 추천 영화들 정보 가져오기
 
     dic = {}
     cast = []
     crew = []
 
-    for i in response2:
-        if cast['id'] < 10:
-            cast.append(i.get('cast_id'))
+    for i in response2.get('cast'):
+        if i.get('cast_id') < 10:
+            cast.append(i.get('name'))
     dic['cast'] = cast
 
-    for i in response2:
-        if crew['department'] == 'Directing':
-            crew.append(i.get('department'))
+    for i in response2.get('crew'):
+        if i.get('department') == 'Directing':
+            crew.append(i.get('name'))
     dic['crew'] = crew
 
     if dic == {}:
