@@ -14,14 +14,8 @@ def ranking():
     }
     response = requests.get(BASE_URL+path, params=params).json()
     results = response.get('results')
-    movie_list = []
-    for i in results:
-      
-      if 8 <= i.get('vote_average'):
-        movie_list.append(i)
-        movie_list.sort()
-
-    return movie_list
+    movie_list = sorted(results, key = lambda x : x ['vote_average'])
+    return (movie_list[:5])
 
 
 
