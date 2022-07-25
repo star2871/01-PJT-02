@@ -51,16 +51,16 @@ def credits(title):
         response = requests.get(URL+path, params=params).json() # title을 입력하고 검색했을 떄 나오는 결과를 json으로 받음
         
         c1 = response.get('crew')
-        ca = []
-        for i in len(c1):
-            if i['cast_id'] < 10:
-                ca.append(i['name'])
+        cr = []
+        for i in c1:
+            if i['department'] == 'Directing':
+                cr.append(i['name'])
 
         c2 = response.get('cast')
-        cr = []
-        for i in len(c2):
-            if i['department'] == 'directing':
-                cr.append(i['name'])
+        ca = []
+        for i in c2:
+            if i['cast_id'] < 10:
+                ca.append(i['name'])
 
         return {"cast" : ca, "crew" : cr}
     
