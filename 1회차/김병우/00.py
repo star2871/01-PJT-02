@@ -8,6 +8,6 @@ params = {
 } # params 딕셔너리 만듬
 
 URL = "https://api.bithumb.com/public/ticker/"
-r = requests.get(URL, params=params).json()
-
+r = requests.get(URL).json()
+    
 print(r["data"]["prev_closing_price"]) # 전일종가
