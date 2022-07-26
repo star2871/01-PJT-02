@@ -40,15 +40,22 @@ def credits(title):
         cast = []
         crew = []
         credits = requests.get(BASE_URL + path_2, params = params_2).json()
-        for i in credits:
-            if i['department']:
-                if i['department'] == 'Directing':
-                    crew.append(i['name'])
-            else:
-                if i['cast_id'] < 10:
-                    cast.append(i['name'])
-        return cast, crew
+        cast_list = credits.get('cast')
+        crew_list = credits.get('crew')
+
+        for i in cast_list:
+            if i['cast_id'] < 10:
+                cast.append(i['name'])
         
+        for i in crew_list:
+            if i['department'] == 'Directing':
+                crew.append(i['name'])
+
+        total_list = dict()
+        total_list['cast'] = cast
+        total_list['crew'] = crew
+
+        return total_list
     else:
         return None
 
