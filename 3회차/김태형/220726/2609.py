@@ -16,9 +16,9 @@ def gcd(a,b):
         return gcd(b,a%b)
 
 def lcm(a,b):
-    m = gcd(a,b)
     if a<b:
         a,b=b,a
+    m = gcd(a,b)
     if a%b==0:
         return a
     else:
