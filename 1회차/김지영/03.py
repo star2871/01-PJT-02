@@ -1,10 +1,32 @@
+# 인기 영화 평점 높은순으로 5개만 정렬, 출력
 import requests
 from pprint import pprint
 
-
 def ranking():
-    pass 
-    # 여기에 코드를 작성합니다.  
+  pass 
+  # 여기에 코드를 작성합니다.  
+  BASE_URL = 'https://api.themoviedb.org/3'
+  path = '/movie/popular'
+  params = {
+      'api_key': '66c53dabd7bc9afc53c2ca7eba855583',
+      'language' : 'ko-KR'
+  }
+  response = requests.get(BASE_URL+path, params=params).json()
+  # 일단 vote_average까지 접근하려면 딕셔너리 건너, 리스트 건너, 딕셔너리key접근~~
+  v = response.get('results') # type(v) = list
+  k = 0
+  p = v[len(v)//2].get('vote_average')
+  for i in v:
+    vk = v[k].get('vote_average')
+    while vk < p:
+      k += 1
+    while vk > p:
+      k -= 1
+    if vk <= v[k+1]:
+      v[k]
+    # ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ안풀려요ㅠㅠㅠㅠㅠ
+
+  return 
 
 
 # 아래의 코드는 수정하지 않습니다.
