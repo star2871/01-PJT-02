@@ -35,6 +35,30 @@ def recommendation(title):
     else:
         return None
 
+    response = requests.get(BASE_URL + path, params = params).json()
+    result = []
+    if response['results']:
+        movie_id = response['results'][0]['id']
+        path = '/movie/{movie_id}/recommendations'
+
+        params = {
+        'api_key': 'e3ebcaf0cb86336e3fa61579f1f0569b',
+        'language': 'ko-KR',
+        'movie_id': movie_id
+        }
+
+        response = requests.get(BASE_URL + path, params=params).json()
+
+        if response['results']:
+            for i in response['results']:
+                result.append(i['title'])
+        return result
+    else:
+        return None
+
+
+
+
 # 아래의 코드는 수정하지 않습니다.
 if __name__ == '__main__':
     """
