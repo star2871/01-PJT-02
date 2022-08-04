@@ -15,11 +15,8 @@ def vote_average_movies():
     }
     li = []
     response = requests.get(base+path, params=params).json()
-    for i in response.get('results'):
-      if i.get('vote_average') >= 8:
-        li.append(i)
-    return li
-
+    new_li = list(map(lambda x:x , filter(lambda x:x['vote_average'] >= 8, response['results'])))
+    return new_li
 
 # 아래의 코드는 수정하지 않습니다.
 if __name__ == '__main__':

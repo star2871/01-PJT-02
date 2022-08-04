@@ -9,10 +9,11 @@ key = os.getenv('key')
 
 def recommendation(title):
     base = 'https://api.themoviedb.org/3'
-    path = f'/search/movie?query={title}'
+    path = f'/search/movie'
     params = {
     'api_key': key,
-    'language': 'ko-KR'
+    'language': 'ko-KR',
+    'query' : title
     }
     li = []
     try:

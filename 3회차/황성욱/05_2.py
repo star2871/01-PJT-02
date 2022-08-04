@@ -21,27 +21,21 @@ def credits(title):
         res = response['results']
         movie_id =  res[0]['id']
     except:
-        # return "검색값이 없습니다"
         return None
+        return "검색값이 없습니다"
     res_dict = {}
-    cast_li = []
-    crew_li = []
-    print(res,movie_id)
+    
     detail_path = f'/movie/{movie_id}/credits'
     response2 = requests.get(base+detail_path, params=params).json()
-    raw_crew_li = response2.get('crew')
-    raw_cast_li = response2.get('cast')
-    for j in raw_crew_li:
-        if j.get('department') == 'Directing':
-            crew_li.append(j.get('name'))
-    for k in raw_cast_li:
-        if k.get('cast_id') < 10:
-            cast_li.append(k.get('name'))
-        res_dict["cast"] = cast_li
-        res_dict["crew"] = crew_li
-    return res_dict
     
-
+    crew_li = list(map(lambda x:x['name'] if x['department'] == 'Directing' else None,response2['crew']))
+    cast_li = list(map(lambda x:x['name'] if x['cast_id'] < 10 else None,response2['cast']))
+    res_cr = list(filter(lambda x:x != None,crew_li))
+    res_ca = list(filter(lambda x:x != None,cast_li))
+    res_dict['cast'], res_dict['crew'] = res_ca, res_cr
+    
+    return res_dict
+   
 # 아래의 코드는 수정하지 않습니다.
 if __name__ == '__main__':
     """
