@@ -11,26 +11,26 @@ def credits(title):
         'query' : title,
         'language' : 'ko-kr'
     }
-    try:
-        res = requests.get(base_url+path,params = params).json()
-        res_id = res.get('results')[0].get('id')#첫번째 영화의 정보들에 접근하여 id 값 가져옴
-        parasite_id = ''
+    # try:
+    res = requests.get(base_url+path,params = params).json()
+    res_id = res.get('results')[0].get('id')#첫번째 영화의 정보들에 접근하여 id 값 가져옴
+    parasite_id = ''
 
-        path2 = f'/movie/{res_id}/credits'
-        res_credits = requests.get(base_url+path2, params = params).json()
+    path2 = f'/movie/{res_id}/credits'
+    res_credits = requests.get(base_url+path2, params = params).json()
+    
+    result = {'cast':[],'crew':[]}
+    for i in range(len(res_credits.get('cast'))):
+        if int(res_credits.get('cast')[i].get('cast_id')) < 10:
+            result.get('cast').append(res_credits.get('cast')[i].get('name'))
         
-        result = {'cast':[],'crew':[]}
-        for i in range(len(res_credits.get('cast'))):
-            if int(res_credits.get('cast')[i].get('cast_id')) < 10:
-                result.get('cast').append(res_credits.get('cast')[i].get('name'))
-        for i in range(len(res_credits.get('crew'))):   
-            if res_credits.get('crew')[i].get('department') == "Directing":
-                result.get('crew').append(res_credits.get('crew')[i].get('name'))
+        if res_credits.get('crew')[i].get('department') == "Directing":
+            result.get('crew').append(res_credits.get('crew')[i].get('name'))
 
-        return result
+    return len(res_credits.get('crew'))
      
-    except IndexError:
-        return None
+    # except IndexError:
+    #     return None
 
     # 여기에 코드를 작성합니다.  
 
